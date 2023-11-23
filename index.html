@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Backstory Generator</title>
+</head>
+<body>
+
+    <h1>D&D Character Backstory Generator</h1>
+
+    <!-- Form for Race Selection -->
+    <form id="raceForm">
+        <fieldset>
+            <legend>Race</legend>
+            <label>
+                <input type="radio" name="race" value="human"> Human
+            </label>
+            <label>
+                <input type="radio" name="race" value="elf"> Elf
+            </label>
+            <label>
+                <input type="radio" name="race" value="tiefling"> Tiefling
+            </label>
+            <label>
+                <input type="radio" name="race" value="drow"> Drow
+            </label>
+            <label>
+                <input type="radio" name="race" value="half-elf"> Half-Elf
+            </label>
+            <label>
+                <input type="radio" name="race" value="half-orc"> Half-Orc
+            </label>
+            <label>
+                <input type="radio" name="race" value="halfling"> Halfling
+            </label>
+            <label>
+                <input type="radio" name="race" value="dwarf"> Dwarf
+            </label>
+            <label>
+                <input type="radio" name="race" value="gnome"> Gnome
+            </label>
+            <label>
+                <input type="radio" name="race" value="githyanki"> Githyanki
+            </label>
+            <label>
+                <input type="radio" name="race" value="dragonborn"> Dragonborn
+            </label>
+        </fieldset>
+    </form>
+
+    <!-- Form for Class Selection -->
+    <form id="classForm">
+        <fieldset>
+            <legend>Class</legend>
+            <label>
+                <input type="radio" name="class" value="barbarian"> Barbarian
+            </label>
+            <label>
+                <input type="radio" name="class" value="bard"> Bard
+            </label>
+            <label>
+                <input type="radio" name="class" value="cleric"> Cleric
+            </label>
+            <label>
+                <input type="radio" name="class" value="druid"> Druid
+            </label>
+            <label>
+                <input type="radio" name="class" value="fighter"> Fighter
+            </label>
+            <label>
+                <input type="radio" name="class" value="monk"> Monk
+            </label>
+            <label>
+                <input type="radio" name="class" value="paladin"> Paladin
+            </label>
+            <label>
+                <input type="radio" name="class" value="ranger"> Ranger
+            </label>
+            <label>
+                <input type="radio" name="class" value="rogue"> Rogue
+            </label>
+            <label>
+                <input type="radio" name="class" value="sorcerer"> Sorcerer
+            </label>
+            <label>
+                <input type="radio" name="class" value="warlock"> Warlock
+            </label>
+            <label>
+                <input type="radio" name="class" value="wizard"> Wizard
+            </label>
+        </fieldset>
+    </form>
+
+    <!-- Form for Character Information -->
+    <form id="infoForm">
+        <fieldset>
+            <legend>Demographics</legend>
+            <label for="charName">Name:</label>
+            <input type="text" id="charName" name="charName" required>
+
+            <label for="charAge">Age:</label>
+            <input type="number" id="charAge" name="charAge" required>
+
+            <label for="charGender">Gender:</label>
+            <select id="charGender" name="charGender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </fieldset>
+    </form>
+
+    <!-- Form for Keywords -->
+    <form id="keywordsForm">
+        <fieldset>
+            <legend>Keywords</legend>
+            <label for="personality-keywords">Personality Keywords:</label>
+            <input type="text" id="personality-keywords" name="personality-keywords">
+
+            <label for="background-keywords">Background Keywords:</label>
+            <input type="text" id="background-keywords" name="background-keywords">
+        </fieldset>
+    </form>
+
+    <!-- Done Button -->
+    <button type="button" onclick="generateBackstory()">Done</button>
+
+    <!-- Output Text Box -->
+    <form>
+        <fieldset>
+            <legend>Your Backstory Generator Prompt</legend>
+            <label for="output">
+                <textarea id="output" rows="4" cols="50" readonly></textarea>
+            </label>
+            <p>Copy and paste this prompt into ChatGPT to generate your character's backstory.</p>
+        </fieldset>
+    </form>
+
+    <script>
+        function generateBackstory() {
+            // Get values from form elements
+            var age = document.getElementById('charAge').value;
+            var gender = document.getElementById('charGender').value;
+            var race = getSelectedRadioButton('raceForm');
+            var charClass = getSelectedRadioButton('classForm');
+            var name = document.getElementById('charName').value;
+            var personalityKeywords = document.getElementById('personality-keywords').value;
+            var backgroundKeywords = document.getElementById('background-keywords').value;
+
+            // Display the generated text in the output textarea
+            var outputText = "Generate a backstory for a " + age + " year old " + gender + " " + race + " " + charClass + " D&D character named " + name + " using the following keywords about their personality: '" + personalityKeywords + "' and the following keywords about their background: '" + backgroundKeywords + "'.";
+            document.getElementById('output').value = outputText;
+        }
+
+        function getSelectedRadioButton(formId) {
+            var form = document.getElementById(formId);
+            var radios = form.querySelectorAll('input[type=radio]:checked');
+            if (radios.length > 0) {
+                return radios[0].value;
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>
+
